@@ -96,6 +96,7 @@ export function GetGroundZFrom3DCoord(player, pos, callback) {
 
 // Add one vector to another.
 export function AddVector3(vector1, vector2) {
+    if(!vector1 || !vector2) return reject(new Error('AddVector3 => One of vectors not exist.'));
     return {
         x: vector1.x + vector2.x,
         y: vector1.y + vector2.y,
@@ -105,6 +106,7 @@ export function AddVector3(vector1, vector2) {
 
 // Subtract one vector from another.
 export function SubVector3(vector1, vector2) {
+    if(!vector1 || !vector2) return reject(new Error('SubVector3 => One of vectors not exist.'));
     return {
         x: vector1.x - vector2.x,
         y: vector1.y - vector2.y,
@@ -123,6 +125,8 @@ export function GetRandomColor() {
 
 // Get all of the players in range of a position.
 export function GetPlayersInRange(pos, range) {
+    if(!pos) return reject(new Error('GetPlayersInRange => Pos need to be specified.'));
+    if(!range) return reject(new Error('GetPlayersInRange => Range need to be specified.'));
     var inRange = [];
     
     Player.all.forEach((value) => {
@@ -136,11 +140,15 @@ export function GetPlayersInRange(pos, range) {
 
 // Get the distance between two vectors.
 export function Distance(vector1, vector2) {
+    if(!vector1 || !vector2) return reject(new Error('Distance => One of the vectors not exist.'));
     return Math.pow(vector1.x - vector2.x, 2) + Math.pow(vector1.y - vector2.y, 2) + Math.pow(vector1.z - vector2.z, 2);
 }
 
 // Get Random Position Around Position
 export function RandomPosAround(pos, range) {
+    if(!pos) return reject(new Error('RandomPosAround => Pos need to be specified.'));
+    if(!range) return reject(new Error('RandomPosAround => Range need to be specified.'));
+    
     return {
         x: pos.x + (Math.random() * (range * 2)) - range,
         y: pos.y + (Math.random() * (range * 2)) - range,
